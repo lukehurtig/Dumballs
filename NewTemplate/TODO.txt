@@ -1,0 +1,20 @@
+To do for Dumball:
+Add the clouds so they randomly scroll across screen
+Add the sunglasses powerup so it works like the star in Mario
+Add the car powerup so it plows through anything in its path
+Add blue bad guys to game
+Add the Land and Double Land Tiles and make it so pins spawn on top of them
+Potentially adjust spawn mechanics or add procedural spawns mixed into spawns
+
+Ideas:
+Make it so that pins collected allow customization and progression such as powerups, land tiles, ball colors etc
+Make more music that can be altered through menu
+Add a boss once certain criteria has been met and score is high enough
+Make explosion effect a customization option for when enemies are defeated
+Have the game so that it could be progressed beyond the infinite platformer portion
+Make 2 or 3 bosses that are accessed through game progression or making it so far without powerups
+Might need to add lives if game becomes progression based (maybe as unlockable)
+
+Way in the Future Ideas:
+Could make it so the next rendition is oncoming perspective rather than side scrolling 2D
+Next leg could be adventure based whether that is top down or 3D??

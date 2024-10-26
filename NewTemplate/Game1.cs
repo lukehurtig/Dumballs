@@ -8,6 +8,9 @@ using NewTemplate.Collisions;
 using NewTemplate.SpawnableObjects;
 using NewTemplate.ParticleSystem;
 using System;
+using System.IO;
+using System.Reflection.Metadata;
+using System.Xml.Linq;
 
 namespace NewTemplate
 {
@@ -38,6 +41,7 @@ namespace NewTemplate
         //private float _explosionTime = 0;
         private double randomSpawnTime = 0;
         private int score = 0;
+        private int highScore = 0;
 
         #region Assets and Textures
         private Texture2D title;
@@ -109,6 +113,9 @@ namespace NewTemplate
             Components.Add(_fireworks2);
             _fireworks3 = new FireworkParticleSystem(this, 20);
             Components.Add(_fireworks3);
+
+            string data = File.ReadAllText(Path.Join(Content.RootDirectory, "Highscore.txt"));
+            highScore = Int32.Parse(data);
 
             base.Initialize();
         }
@@ -212,7 +219,10 @@ namespace NewTemplate
                     }
                     if ((gamePadState.Buttons.Back == ButtonState.Pressed && previousGamePadSate.Buttons.Back != ButtonState.Pressed) ||
                         (keyboardState.IsKeyDown(Keys.Escape)) && !previousKeyboardState.IsKeyDown(Keys.Escape))
+                    {
+                        File.WriteAllText(Path.Join(Content.RootDirectory, "Highscore.txt"), score.ToString());
                         Exit();
+                    }
                 }                
             }
             #endregion Menu Updates
@@ -316,6 +326,7 @@ namespace NewTemplate
             /// Transition Function between Game Play and Menu
             else if (!gameActive && dumball.GameOver && !menuActive && !_shaking)
             {
+                if (score > highScore) highScore = score;
                 menuActive = true;
                 _shakeTime = 0;
                 MediaPlayer.Play(titleMusic);
@@ -443,6 +454,7 @@ namespace NewTemplate
                 _graphics.PreferredBackBufferHeight / 2), Color.White);
             if (menuActive && !instructions)
             {
+                _spriteBatch2.DrawString(_score, $"Highscore: {highScore}", new Vector2(_graphics.PreferredBackBufferWidth - 215, 20), Color.Gold);
                 _spriteBatch2.DrawString(_instructions, " - Press Start or Enter to Play  -\nPress Y or Space Bar for Instructions\n - Press Back or Esc to Exit Game -",
                 new Vector2(_graphics.PreferredBackBufferWidth * 0.5f - 205, 270), Color.White);
 
